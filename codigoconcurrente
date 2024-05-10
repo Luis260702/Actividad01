@@ -1,0 +1,33 @@
+#include <iostream>
+#include <ctime>
+
+using namespace std;
+
+int main() {
+    int limite_superior = 20;
+    int pares_encontrados = 0;
+
+    // Iniciar el temporizador
+    clock_t tiempo_inicio = clock();
+
+    // Encontrar la cantidad de números pares del 1 al 20
+    for (int i = 1; i < limite_superior; ++i) {
+        if (i % 2 == 0) {
+            pares_encontrados++;
+        }
+    }
+
+    // Detener el temporizador
+    clock_t tiempo_fin = clock();
+
+    // Calcular el tiempo transcurrido en segundos
+    double duracion = (double)(tiempo_fin - tiempo_inicio) / CLOCKS_PER_SEC;
+
+    // Imprimir la cantidad de números pares encontrados
+    cout << "Numeros pares encontrados: " << pares_encontrados << endl;
+
+    // Imprimir el tiempo de ejecución en segundos
+    cout << "Tiempo de ejecución: " << duracion << " segundos" << endl;
+
+    return 0;
+}
