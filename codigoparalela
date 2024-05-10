@@ -1,0 +1,37 @@
+#include <iostream>
+#include <omp.h>
+
+using namespace std;
+
+int main() {
+    int limite_superior = 20;
+    int pares_encontrados = 0;
+
+    // Obtener el número de hilos disponibles
+    int num_hilos = omp_get_max_threads();
+
+    // Iniciar el temporizador
+    double tiempo_inicio = omp_get_wtime();
+
+    // Iniciar la región paralela para buscar números pares
+    #pragma omp parallel for reduction(+:pares_encontrados) num_threads(num_hilos)
+    for (int i = 1; i < limite_superior; ++i) {
+        if (i % 2 == 0) {
+            pares_encontrados++;
+        }
+    }
+
+    // Obtener el tiempo de finalización
+    double tiempo_fin = omp_get_wtime();
+
+    // Imprimir el resultado
+    cout << "Numeros pares encontrados: " << pares_encontrados << endl;
+
+    // Imprimir el tiempo de ejecución
+    cout << "Tiempo de ejecucion: " << tiempo_fin - tiempo_inicio << " segundos" << endl;
+
+    // Imprimir el número de hilos utilizados
+    cout << "Numero de hilos utilizados: " << num_hilos << endl;
+
+    return 0;
+}
